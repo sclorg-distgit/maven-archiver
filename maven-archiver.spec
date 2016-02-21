@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.5
-Release:        9.10%{?dist}
+Release:        9.11%{?dist}
 Epoch:          0
 Summary:        Maven Archiver
 License:        ASL 2.0
@@ -14,15 +14,15 @@ BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}javapackages-tools
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-shared
-BuildRequires:  maven30-maven-resources-plugin
-BuildRequires:  maven30-maven-site-plugin
-BuildRequires:  maven30-maven-doxia-sitetools
-BuildRequires:  maven30-maven-shared-jar
-BuildRequires:  maven30-plexus-interpolation
-BuildRequires:  maven30-plexus-archiver >= 2.1-1
-BuildRequires:  maven30-plexus-utils
-BuildRequires:  maven30-apache-commons-parent
+BuildRequires:  %{?scl_prefix}maven-shared
+BuildRequires:  %{?scl_prefix}maven-resources-plugin
+BuildRequires:  %{?scl_prefix}maven-site-plugin
+BuildRequires:  %{?scl_prefix}maven-doxia-sitetools
+BuildRequires:  %{?scl_prefix}maven-shared-jar
+BuildRequires:  %{?scl_prefix}plexus-interpolation
+BuildRequires:  %{?scl_prefix}plexus-archiver >= 2.1-1
+BuildRequires:  %{?scl_prefix}plexus-utils
+BuildRequires:  %{?scl_prefix}apache-commons-parent
 
 
 %description
@@ -37,7 +37,7 @@ Javadoc for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %pom_add_dep org.apache.maven:maven-core
 # tests don't compile with maven 2.2.1
@@ -45,13 +45,13 @@ rm -fr src/test/java/org/apache/maven/archiver/*.java
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_build
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -65,6 +65,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:2.5-9.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 0:2.5-9.10
 - maven33 rebuild
 
