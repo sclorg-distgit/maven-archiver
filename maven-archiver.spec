@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.5
-Release:        9.11%{?dist}
+Release:        9.12%{?dist}
 Epoch:          0
 Summary:        Maven Archiver
 License:        ASL 2.0
@@ -13,7 +13,7 @@ Source0:        http://repo1.maven.org/maven2/org/apache/maven/%{pkg_name}/%{ver
 BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}javapackages-tools
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}maven-shared
 BuildRequires:  %{?scl_prefix}maven-resources-plugin
 BuildRequires:  %{?scl_prefix}maven-site-plugin
@@ -65,6 +65,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 0:2.5-9.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:2.5-9.11
 - maven33 rebuild #2
 
